@@ -1,0 +1,7 @@
+To configure OpenStack Cinder for Dell EMC storage, you will need to follow these steps:
+
+Install the Dell EMC storage backend drivers: You can find the installation instructions for the Dell EMC storage backend drivers on the OpenStack documentation. 
+The Dell EMC storage backend drivers include the Dell EMC Unity driver, Dell EMC XtremIO driver, Dell EMC VMAX driver, and the Dell EMC ScaleIO driver. 
+Install the appropriate driver for your storage system.
+
+Configure the Cinder backend for Dell EMC storage: To configure the Cinder backend for Dell EMC storage, you will need to update the cinder.conf 
