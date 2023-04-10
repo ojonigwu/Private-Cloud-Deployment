@@ -1,0 +1,80 @@
+
+Install the Ceph client utilities: Install the Ceph client utilities on all Kolla-ansible nodes that will interact with Ceph storage. For Ubuntu-based systems, you can use the following command:
+
+sudo apt-get install ceph ceph-fuse ceph-common ceph-mds
+
+Configure Ceph: Create a new Ceph pool and Ceph user with the necessary permissions to access the pool. You can use the ceph command-line tool or the Ceph dashboard to create the pool and user.
+
+Create Ceph configuration files: Create a new configuration file for Ceph on each Kolla-ansible node that will interact with Ceph storage. The configuration file should be located at /etc/ceph/ceph.conf. Copy the contents of the Ceph configuration file from the Ceph monitor node to each Kolla-ansible node.
+
+Update the Kolla-ansible global variables: Update the Kolla-ansible global variables file (/etc/kolla/globals.yml) to include the following Ceph-related variables:
+
+enable_ceph: "yes"
+ceph_mon_key: "<mon_key>"
+ceph_admin_key: "<admin_key>"
+ceph_pool_name: "<pool_name>"
+ceph_client_user: "<client_user>"
+ceph_client_key: "<client_key>"
+
+Replace <mon_key>, <admin_key>, <pool_name>, <client_user>, and <client_key> with the appropriate values for your Ceph deployment.
+
+Update the Kolla-ansible inventory file: Update the Kolla-ansible inventory file (/etc/kolla/inventory) to specify the Ceph configuration for the Ceph monitor node and the Ceph OSD nodes. For example:
+
+
+[mons]
+ceph-mon-1 ansible_host=<ceph_monitor_node_ip_address> ansible_user=<ssh_user>
+
+[osds]
+ceph-osd-1 ansible_host=<ceph_osd_node_1_ip_address> ansible_user=<ssh_user>
+ceph-osd-2 ansible_host=<ceph_osd_node_2_ip_address> ansible_user=<ssh_user>
+
+[ceph:children]
+mons
+osds
+
+[ceph:vars]
+ceph_cluster_network=<ceph_cluster_network>
+ceph_public_network=<ceph_public_network>
+ceph_osd_journal_size=<ceph_osd_journal_size>
+ceph_osd_memory_target=<ceph_osd_memory_target>
+
+Replace <ceph_monitor_node_ip_address>, <ceph_osd_node_1_ip_address>, <ceph_osd_node_2_ip_address>, <ssh_user>, <ceph_cluster_network>, <ceph_public_network>, <ceph_osd_journal_size>, and <ceph_osd_memory_target> with the appropriate values for your Ceph deployment.
+
+Deploy the Ceph OSDs: Run the Kolla-ansible deployment command to deploy the Ceph OSDs on the Ceph OSD nodes.
+
+Run kolla-ansible -i /etc/kolla/inventory deploy -t ceph
+
+Deploy OpenStack services: Run the Kolla-ansible deployment command to deploy the OpenStack services on the Kolla-ansible nodes.
+
+kolla-ansible -i /etc/kolla/inventory deploy
+
+
+Stein
+Step 1 set the inventory  
+
+[ceph]
+ceph-node1
+ceph-node2
+ceph-node3
+
+[ceph:vars]
+ceph_fsid=1234-5678
+ceph_auth_username=admin
+ceph_auth_password=admin_password
+
+ STEP 2    set the ceph for global.yaml
+kolla_base_distro: "ubuntu"
+kolla_install_type: "binary"
+openstack_release: "stein"
+kolla_internal_vip_address: "10.0.0.100"
+network_interface: "eth0"
+neutron_external_interface: "eth1"
+storage_backend: "ceph"
+glance_backend: "rbd"
+ceph_cluster_fsid: "1234-5678"
+ceph_client_user: "admin"
+ceph_client_key: "/etc/ceph/ceph.client.admin.keyring"
+
+kolla-ansible -i /path/to/inventory/file deploy --tags ceph,glance
+Run Kolla-Ansible: Finally, run Kolla-Ansible to deploy OpenStack services with Ceph backend enabled. Use the --tags option to specify which services you want to deploy. For example:
+
