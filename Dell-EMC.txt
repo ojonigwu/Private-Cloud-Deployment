@@ -5,3 +5,10 @@ The Dell EMC storage backend drivers include the Dell EMC Unity driver, Dell EMC
 Install the appropriate driver for your storage system.
 
 Configure the Cinder backend for Dell EMC storage: To configure the Cinder backend for Dell EMC storage, you will need to update the cinder.conf 
+
+Replace <SAN_IP>, <SAN_LOGIN>, and <SAN_PASSWORD> with the IP address, login name, and password for your Dell EMC storage system. The <UNITY_IO_PORTS> parameter should contain a comma-separated list of the front-end IO ports for the storage system, and the <UNITY_STORAGE_POOL_NAMES> parameter should contain a comma-separated list of the storage pool names. The <UNITY_SERVER_META_POOL_NAME> parameter should contain the name of the pool used for server metadata.
+
+Restart the Cinder services: After making changes to the cinder.conf file, you will need to restart the Cinder services to apply the changes.
+Verify the Cinder configuration: You can verify the Cinder configuration by using the OpenStack CLI commands. Use the openstack volume type create command to create a new volume type, and specify the --property volume_backend_name=dell_emc_backend option to associate the volume type with the Dell EMC storage backend. Then, use the openstack volume create command to create a new volume, specifying the --type option to use the newly created volume type.
+
+By following these steps, you can configure OpenStack Cinder for Dell EMC storage. However, keep in mind that the specific configuration and requirements may vary depending on the infrastructure and deployment needs. It is recommended to consult the Dell EMC and OpenStack documentation and seek expert assistance if necessary.
