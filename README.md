@@ -19,3 +19,6 @@ Deploying a private cloud using OpenStack can provide your organization with a f
    8) Integrate with other systems: Integrate your private cloud deployment with other systems, such as identity and access management systems, logging and       monitoring tools, and automation tools.
 
 Overall, deploying a private cloud using OpenStack can be a complex process, but it provides a powerful and flexible infrastructure for managing your computing resources.  
+
+
+For deployment and life cycle management we will be using Kolla-ansible is a powerful tool for deploying and managing OpenStack services, and can help simplify the process of setting up a production-ready OpenStack cloud
