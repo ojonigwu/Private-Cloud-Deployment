@@ -1,0 +1,31 @@
+In this example, some of the configuration options include:
+
+kolla_base_distro: The base distribution used for the container images.
+kolla_install_type: The method used for installing Kolla (source or binary).
+kolla_internal_vip_address: The virtual IP address for the OpenStack services.
+network_interface: The network interface to use for OpenStack services.
+neutron_external_interface: The network interface to use for external networking.
+enable_cinder: Whether to enable the Cinder block storage service.
+enable_ceph: Whether to enable Ceph as the backend storage.
+ceph_backend: The backend storage driver to use (rbd, cephfs, or nfs).
+ceph_pool_pg_num: The number of placement groups to create.
+ceph_pool_size: The number of copies of data to store.
+ceph_fsid: The unique identifier for the Ceph cluster.
+ceph_monitor_interface: The network interface to use for Ceph monitoring.
+ceph_public_network: The network to use for Ceph public network.
+ceph_cluster_network: The network to use for Ceph cluster network.
+glance_backend: The backend storage driver to use for Glance (rbd, cephfs, or nfs).
+nova_compute_virt_type: The virtualization type to use for Nova compute (qemu or kvm).
+enable_swift: Whether to enable the Swift object storage service.
+swift_replicas: The number of replicas to create for Swift data.
+swift_hash_path_suffix: The hash path suffix to use for Swift.
+swift_hash_path_prefix: The hash path prefix to use for Swift.
+enable_haproxy: Whether to enable HAProxy for load balancing.
+enable_keepalived: Whether to enable Keepalived for HAProxy high availability.
+haproxy_stats_listen_port: The port to use for HAProxy statistics.
+You will need to customize this file to match your specific deployment requirements and infrastructure configuration. It is recommended to consult the Kolla-ansible documentation and seek expert assistance if necessary for a deployment of this scale.
+
+
+
+
+
